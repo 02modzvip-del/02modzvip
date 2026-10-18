@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0d16">
+<title>02 MODZ VIP</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:22px 14px;background:radial-gradient(at top left,#27285c,#090d17 65%);color:#f5f6ff;font-family:Arial,sans-serif}
+.card{max-width:650px;margin:auto;padding:25px 20px;background:#111827;border:1px solid #30394d;border-radius:28px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.brand{font-weight:900;letter-spacing:2px;font-size:18px}
+.online{color:#8cf0bf;background:#123629;padding:9px 12px;border-radius:20px;font-size:13px}
+.logo{margin:30px 0 20px;width:78px;height:78px;display:grid;place-items:center;border-radius:23px;background:linear-gradient(135deg,#707aff,#a05cff);font-size:34px;font-weight:bold}
+h1{font-size:30px;margin-bottom:12px}
+p{color:#9ca9bd;line-height:1.7}
+.features{padding:18px;border-radius:18px;background:#0b1220;border:1px solid #293449;margin:24px 0}
+label{display:block;font-weight:bold;margin-bottom:10px}
+input{width:100%;padding:17px;border-radius:14px;border:1px solid #8176ff;background:#090e18;color:white;font-size:16px}
+button,.btn{display:flex;justify-content:center;align-items:center;width:100%;padding:16px;margin-top:13px;border:0;border-radius:14px;text-decoration:none;font-size:15px;font-weight:bold;cursor:pointer}
+.activate{background:linear-gradient(100deg,#707aff,#a05cff);color:white}
+.telegram{background:#263650;color:white}
+.open{background:#202d43;color:white}
+.copy{background:linear-gradient(100deg,#2fa982,#21877f);color:white}
+.status{display:none;padding:18px;border-radius:18px;background:#0c291f;border:1px solid #24634c;margin-top:24px}
+.row{display:flex;justify-content:space-between;gap:10px;margin:15px 0}
+.row strong{color:#bff8d8;text-align:right}
+pre{white-space:pre;overflow:auto;max-height:400px;background:#080d16;color:#d7def8;padding:14px;border:1px solid #30394d;border-radius:12px;font-size:12px}
+.note{font-size:13px}
+</style>
+</head>
+<body>
+<main class="card">
+ <div class="top">
+  <div class="brand">02 MODZ VIP</div>
+  <div class="online">● Online</div>
+ </div>
+
+ <div class="logo">02</div>
+ <h1>Activate HAPP Access</h1>
+ <p>Enter your license key to access the configuration.</p>
+
+ <div class="features">
+  ✓ Simple key activation<br><br>
+  ◷ 48-hour demo access<br><br>
+  ⌁ Copy JSON configuration
+ </div>
+
+ <label for="key">Enter your license key</label>
+ <input id="key" placeholder="Enter your key" autocomplete="off">
+
+ <button class="activate" onclick="activate()">ACTIVATE ACCESS</button>
+
+ <a class="btn telegram"
+ href="https://t.me/Z4xbanmodz" target="_blank" rel="noopener">
+ GET KEY ON TELEGRAM ↗
+ </a>
+
+ <p class="note">Demo version. Real key validation and secure expiry require a backend.</p>
+
+ <section class="status" id="result">
+  <div class="row"><span>Status</span><strong id="state">Active (Demo)</strong></div>
+  <div class="row"><span>Expires</span><strong id="expiry"></strong></div>
+
+  <h3>JSON Configuration</h3>
+  <pre id="json"></pre>
+
+  <button class="copy" onclick="copyConfig()">COPY CODE</button>
+
+  <a class="btn open"
+  href="https://play.google.com/store/apps/details?id=com.happproxy"
+  target="_blank" rel="noopener">
+  OPEN HAPP ↗
+  </a>
+ </section>
+</main>
+
+<script>
+const CONFIG = {
+  "remarks":"Kurama-Client",
+  "inbounds":[
+    {
+      "tag":"socks",
+      "listen":"127.0.0.1",
+      "port":10808,
+      "protocol":"socks",
+      "settings":{"auth":"noauth","udp":true},
+      "sniffing":{
+        "enabled":true,
+        "destOverride":["http","tls","quic"],
+        "routeOnly":false
+      }
+    },
+    {
+      "tag":"http",
+      "listen":"127.0.0.1",
+      "port":10809,
+      "protocol":"http",
+      "sniffing":{
+        "enabled":true,
+        "destOverride":["http","tls","quic"],
+        "routeOnly":false
+      },
+      "settings":{"auth":"noauth"}
+    }
+  ],
+  "dns":{
+    "servers":["1.1.1.1","8.8.8.8"],
+    "queryStrategy":"UseIPv4"
+  },
+  "outbounds":[
+    {
+      "tag":"proxy",
+      "protocol":"hysteria",
+      "settings":{
+        "address":"wraith-bom2.aimhack.shop",
+        "port":443,
+        "version":2
+      },
+      "streamSettings":{
+        "network":"hysteria",
+        "security":"tls",
+        "tlsSettings":{
+          "serverName":"wraith-bom2.aimhack.shop",
+          "alpn":["h3"]
+        },
+        "hysteriaSettings":{
+          "version":2,
+          "auth":"AMHK-05AF-AB2E-A78E"
+        }
+      }
+    },
+    {"tag":"direct","protocol":"freedom"},
+    {"tag":"block","protocol":"blackhole"}
+  ],
+  "routing":{
+    "domainStrategy":"AsIs",
+    "rules":[
+      {
+        "type":"field",
+        "ip":["geoip:private"],
+        "outboundTag":"direct"
+      },
+      {
+        "type":"field",
+        "domain":[
+          "full:event-vodka.freefireind.in",
+          "full:indevent.ggblueshark.com",
+          "full:sgevent.ggblueshark.com",
+          "full:meevent.ggblueshark.com",
+          "full:thevent.ggblueshark.com",
+          "full:sacevent.ggblueshark.com",
+          "full:idevent.ggblueshark.com",
+          "full:bdevent.ggpolarbear.com",
+          "regexp:event\\.gg(blueshark|polarbear)\\.com$",
+          "full:gin.freefireind.in",
+          "full:gin.freefiremobile.com",
+          "full:vodka.freefireind.in",
+          "full:dl.castle.freefiremobile.com",
+          "full:dl.cdn.freefiremobile.com",
+          "full:dl-core.cdn.freefiremobile.com",
+          "full:dl.gmc.freefiremobile.com",
+          "full:dl.aw.freefiremobile.com",
+          "full:dl.dir.freefiremobile.com",
+          "full:dl.bs.freefiremobile.com",
+          "full:dl.ak.freefiremobile.com",
+          "full:dl-sg-production.freefiremobile.com",
+          "full:dl-tata.freefireind.in",
+          "full:dl-bs.ggpolarbear.com",
+          "domain:freefiremobile-a.akamaihd.net",
+          "full:client.nulldash.store",
+          "full:client.aimhack.shop",
+          "full:client.xreg.store",
+          "full:client.trollmodz.store",
+          "full:client.silentx.store",
+          "full:client.zentnityx.store",
+          "full:client.ruizenteam.store"
+        ],
+        "outboundTag":"direct"
+      },
+      {
+        "type":"field",
+        "network":"tcp,udp",
+        "outboundTag":"proxy"
+      }
+    ]
+  },
+  "log":{"loglevel":"warning"}
+};
+
+const configText = JSON.stringify(CONFIG,null,2);
+document.getElementById("json").textContent = configText;
+
+function activate(){
+  const key = document.getElementById("key").value.trim();
+
+  if(!/^[A-Za-z0-9_-]{6,64}$/.test(key)){
+    alert("Enter a key with 6–64 letters, numbers, _ or -.");
+    return;
+  }
+
+  const expires = Date.now() + 48*60*60*1000;
+
+  document.getElementById("expiry").textContent =
+    new Date(expires).toLocaleString();
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+
+async function copyConfig(){
+  try{
+    await navigator.clipboard.writeText(configText);
+    alert("Configuration copied!");
+  }catch(e){
+    const area = document.createElement("textarea");
+    area.value = configText;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+    alert("Configuration copied!");
+  }
+}
+</script>
+</body>
+</html>
