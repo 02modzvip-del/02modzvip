@@ -4,352 +4,694 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090000">
-<title>02 MODZ VIP PROXY</title>
+<meta name="theme-color" content="#050a16">
+<title>02 MODZ VIP</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;font-family:Arial,sans-serif;color:#fff;background:#090000;overflow-x:hidden}
-.bg{position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse at top,#650000,transparent 60%),linear-gradient(145deg,#050505,#260000,#080000);background-size:200% 200%;animation:bgmove 8s infinite alternate}
-@keyframes bgmove{from{background-position:0 0}to{background-position:100% 100%}}
-#rain{position:fixed;inset:0;width:100%;height:100%;z-index:-2;pointer-events:none}
-.glow{position:fixed;width:200px;height:200px;background:red;filter:blur(100px);opacity:.2;z-index:-1;pointer-events:none}
-.glow.a{top:5%;left:-100px}.glow.b{right:-100px;bottom:5%}
-.container{width:min(92%,480px);margin:24px auto}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
-.brand{font-weight:900;letter-spacing:3px}
-.status{font-size:10px;color:#ff8c8c;border:1px solid #773030;padding:8px 10px;border-radius:20px;background:#200606}
-.dot{display:inline-block;width:7px;height:7px;background:#ff2525;border-radius:50%;margin-right:5px;box-shadow:0 0 9px red}
-.hero{text-align:center;padding:10px 0 28px}
-.logo{width:108px;height:108px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;border:2px solid #ff2929;border-radius:28px;background:linear-gradient(145deg,#390000,#080000);box-shadow:0 0 20px #ff000066;animation:pulse 1.8s infinite alternate}
-@keyframes pulse{to{box-shadow:0 0 40px #ff0000aa}}
-.logo span{font-size:36px;font-weight:1000;color:white;text-shadow:0 0 15px red;transform:skew(-8deg)}
-.hero h1{font-size:34px;letter-spacing:4px;text-shadow:0 0 15px red}
-.hero p{color:#ffaaaa;font-size:11px;letter-spacing:3px;margin-top:10px}
-.card{padding:21px;margin-bottom:17px;border:1px solid #702020;border-radius:19px;background:linear-gradient(145deg,#1b0808ee,#090303ee);box-shadow:0 10px 30px #0008;backdrop-filter:blur(8px)}
-.card h2{font-size:15px;margin-bottom:10px}
-.desc{font-size:12px;color:#c3a5a5;line-height:1.7;margin-bottom:17px}
-label{display:block;color:#ff8585;font-size:11px;letter-spacing:2px;margin-bottom:9px}
-input{width:100%;padding:15px;background:#080303;color:white;border:1px solid #742020;border-radius:10px;outline:none;margin-bottom:13px;font-size:14px}
-input:focus{border-color:#ff3030;box-shadow:0 0 12px #ff000033}
-button,.link{display:block;width:100%;padding:15px;border:0;border-radius:10px;font-size:12px;font-weight:900;letter-spacing:1px;text-align:center;text-decoration:none;cursor:pointer}
-.primary{color:white;background:linear-gradient(100deg,#9d0000,#ff2929,#a00000);box-shadow:0 0 18px #ff000033}
-.primary:disabled{opacity:.6}
-.secondary{margin-top:10px;color:#fff;background:#210707;border:1px solid #762020}
-.message{text-align:center;font-size:12px;color:#ff7777;margin-top:12px;min-height:16px}
-#countdown{display:none;text-align:center;margin-top:15px;padding:15px;border:1px dashed #ff3939;border-radius:12px;background:#26000099}
-#number{display:block;font-size:45px;font-weight:900;color:#ff3030;text-shadow:0 0 18px red}
-#configSection{display:none}
-.confighead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
-.badge{color:#91ffad;font-size:9px;border:1px solid #25783a;border-radius:20px;padding:6px 8px}
-pre{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-height:400px;overflow:auto;background:#050202;color:#ffb7b7;border:1px solid #431818;border-radius:10px;padding:13px;font-size:11px;line-height:1.6;margin-bottom:13px}
-#copyMessage{display:none;text-align:center;font-size:12px;color:#9affad;margin-top:12px}
-.features{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.feature{background:#120606;border:1px solid #4b1818;border-radius:12px;padding:13px}
-.feature .icon{font-size:22px;margin-bottom:8px}
-.feature strong{display:block;font-size:12px;margin-bottom:5px}
-.feature small{color:#bda2a2;font-size:10px;line-height:1.5}
-.links{display:grid;gap:10px}
-.play{background:#18331f;color:#a7ffb8;border:1px solid #326a3c}
-.telegram{background:#087db5;color:#fff}
-footer{text-align:center;color:#886666;font-size:10px;line-height:2;letter-spacing:1px;padding:15px 0 28px}
-@media(max-width:360px){.hero h1{font-size:27px}.card{padding:16px}}
+:root {
+  --blue: #00c8ff;
+  --blue2: #087bff;
+  --bg: #050a16;
+  --panel: #091426;
+  --line: rgba(0,200,255,.4);
+  --white: #f4fcff;
+  --muted: #91a9c4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--white);
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 0%, #073c70 0%, transparent 55%),
+    var(--bg);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 39px,
+      rgba(0,200,255,.045) 40px
+    );
+}
+
+.ambient {
+  position: fixed;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: rgba(0,170,255,.23);
+  filter: blur(75px);
+  box-shadow: 0 0 60px #008cff;
+  pointer-events: none;
+  z-index: -1;
+  animation: float 5s ease-in-out infinite alternate,
+             pulse 2s ease-in-out infinite alternate;
+}
+
+.ambient.one {
+  top: 8%;
+  left: -110px;
+}
+
+.ambient.two {
+  right: -120px;
+  bottom: 5%;
+  animation-delay: 1s;
+}
+
+@keyframes float {
+  from { transform: translateY(-20px); }
+  to { transform: translateY(35px); }
+}
+
+@keyframes pulse {
+  from { opacity: .35; }
+  to { opacity: .9; }
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 5%;
+  background: rgba(5,10,22,.9);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.brand span,
+.hero h1 span,
+.logo span {
+  color: var(--blue);
+  text-shadow: 0 0 10px var(--blue), 0 0 25px var(--blue2);
+}
+
+.status {
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  font-size: 10px;
+  color: var(--blue);
+  box-shadow: 0 0 12px rgba(0,200,255,.15);
+}
+
+.status::before {
+  content: "● ";
+}
+
+main {
+  width: min(100% - 28px, 520px);
+  margin: 25px auto 40px;
+}
+
+.hero {
+  text-align: center;
+  padding: 22px 8px 26px;
+}
+
+.logo {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--blue);
+  border-radius: 25px;
+  background: linear-gradient(145deg,#064078,#061020);
+  box-shadow:
+    0 0 12px var(--blue),
+    0 0 30px rgba(0,140,255,.5);
+  animation: logoGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+  from {
+    box-shadow: 0 0 8px var(--blue);
+  }
+  to {
+    box-shadow: 0 0 25px var(--blue), 0 0 45px var(--blue2);
+  }
+}
+
+.logo strong {
+  font-size: 27px;
+  font-weight: 1000;
+}
+
+.hero h1 {
+  font-size: clamp(28px,8vw,40px);
+  letter-spacing: 2px;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.card {
+  padding: 20px;
+  margin-bottom: 17px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: linear-gradient(145deg,rgba(10,28,48,.97),rgba(5,12,25,.98));
+  box-shadow:
+    0 0 10px rgba(0,200,255,.15),
+    0 0 25px rgba(0,120,255,.1);
+  animation: cardGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes cardGlow {
+  from { border-color: rgba(0,200,255,.25); }
+  to {
+    border-color: rgba(0,200,255,.8);
+    box-shadow: 0 0 18px rgba(0,200,255,.2);
+  }
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 9px;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.field-label {
+  display: block;
+  font-size: 11px;
+  margin: 12px 0 8px;
+  color: #c4eaff;
+}
+
+input[type="password"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 14px;
+  color: white;
+  background: #050b15;
+  border: 1px solid #075b85;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+}
+
+input[type="password"]:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 14px rgba(0,200,255,.3);
+}
+
+input::placeholder {
+  color: #66819b;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 47px;
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:active {
+  transform: scale(.98);
+}
+
+.btn-blue {
+  color: white;
+  background: linear-gradient(100deg,#0066bb,#00bfff);
+  box-shadow: 0 0 20px rgba(0,180,255,.25);
+}
+
+.btn-dark {
+  color: white;
+  background: #09172a;
+  border-color: var(--line);
+}
+
+.btn-outline {
+  color: var(--blue);
+  background: transparent;
+  border-color: var(--line);
+}
+
+.btn + .btn {
+  margin-top: 10px;
+}
+
+.message {
+  display: none;
+  padding: 11px;
+  margin-top: 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.message.error {
+  display: block;
+  color: #ff8a9d;
+  background: #200c18;
+}
+
+.message.success {
+  display: block;
+  color: #a8ffc4;
+  background: #092019;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 11px;
+  margin-bottom: 17px;
+}
+
+.stat {
+  padding: 16px 12px;
+  background: linear-gradient(145deg,#0b2037,#07101e);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: 0 0 12px rgba(0,150,255,.12);
+}
+
+.stat-label {
+  font-size: 10px;
+  color: #9cb9d2;
+  margin-bottom: 9px;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.stat-value small {
+  font-size: 10px;
+  color: var(--blue);
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid #173049;
+  font-size: 12px;
+}
+
+.info-row:last-child {
+  border-bottom: 0;
+}
+
+.info-row span:first-child {
+  color: #91a9c4;
+}
+
+.info-row span:last-child {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.blue-text {
+  color: var(--blue) !important;
+}
+
+.notice {
+  margin-top: 13px;
+  padding: 12px;
+  color: #b4d8f2;
+  background: #07182a;
+  border-left: 3px solid var(--blue);
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.footer {
+  text-align: center;
+  padding: 22px 8px;
+  color: #7890a8;
+  font-size: 10px;
+  line-height: 2;
+}
+
+.footer strong {
+  color: var(--blue);
+  text-shadow: 0 0 10px var(--blue);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 20;
+  transform: translate(-50%,20px);
+  opacity: 0;
+  pointer-events: none;
+  width: max-content;
+  max-width: calc(100% - 30px);
+  padding: 13px 17px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #09172a;
+  color: white;
+  font-size: 12px;
+  box-shadow: 0 0 20px rgba(0,180,255,.2);
+  transition: .25s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%,0);
+}
+
+@media(max-width:360px) {
+  .card { padding: 16px; }
+  .stat-value { font-size: 19px; }
+}
 </style>
 </head>
 
 <body>
-<div class="bg"></div>
-<div class="glow a"></div>
-<div class="glow b"></div>
-<canvas id="rain"></canvas>
+<div class="ambient one"></div>
+<div class="ambient two"></div>
 
-<main class="container">
-  <header class="topbar">
-    <div class="brand">02 MODZ</div>
-    <div class="status"><span class="dot"></span>VIP PROXY</div>
-  </header>
+<header class="topbar">
+  <div class="brand">02 <span>MODZ</span></div>
+  <div class="status">VIP PANEL</div>
+</header>
 
+<main>
   <section class="hero">
-    <div class="logo"><span>02⚡</span></div>
-    <h1>02 MODZ</h1>
-    <p>PREMIUM PROXY SYSTEM</p>
+    <div class="logo"><strong>02<span>VIP</span></strong></div>
+    <h1>02 MODZ <span>VIP</span></h1>
+    <p>PREMIUM ACCESS PANEL</p>
   </section>
 
-  <section class="card">
-    <h2>🔐 KEY AUTHENTICATION</h2>
-    <p class="desc">Enter your access key to unlock the VIP configuration.</p>
-    <label for="keyInput">ACCESS KEY</label>
-    <input id="keyInput" type="password" placeholder="Enter your access key" autocomplete="off">
-    <button class="primary" id="unlockBtn">🔓 UNLOCK CONFIGURATION</button>
-    <div class="message" id="message" role="status"></div>
-    <div id="countdown">PREPARING YOUR CONFIG<span id="number">5</span><small>Please wait...</small></div>
-  </section>
+  <!-- LOGIN -->
+  <section class="card" id="loginCard">
+    <div class="card-title">🔐 VIP KEY ACCESS</div>
+    <p class="description">
+      Enter your access key to unlock the panel.
+    </p>
 
-  <section class="card" id="configSection">
-    <div class="confighead">
-      <h2>⚙️ 02MODZ-VIP CONFIG</h2>
-      <span class="badge">READY</span>
-    </div>
-    <p class="desc">Your full configuration is ready. Press below to copy the complete JSON.</p>
-    <pre id="jsonOutput"></pre>
-    <button class="primary" id="copyBtn">📋 COPY CONFIG</button>
-    <div id="copyMessage" role="status"></div>
-  </section>
+    <label class="field-label" for="keyInput">ACCESS KEY</label>
+    <input id="keyInput" type="password"
+      placeholder="Enter your VIP key"
+      autocomplete="off" spellcheck="false">
 
-  <section class="card">
-    <h2>⚡ PANEL FEATURES</h2>
-    <p class="desc">Modern interface with rain animation and quick config access.</p>
-    <div class="features">
-      <div class="feature"><div class="icon">🌧️</div><strong>RAIN EFFECT</strong><small>Animated rain background</small></div>
-      <div class="feature"><div class="icon">🔐</div><strong>KEY ACCESS</strong><small>Access key interface</small></div>
-      <div class="feature"><div class="icon">📋</div><strong>QUICK COPY</strong><small>Copy the full JSON</small></div>
-      <div class="feature"><div class="icon">🔴</div><strong>RED NEON</strong><small>Glowing red design</small></div>
+    <button class="btn btn-blue" id="verifyBtn" style="margin-top:15px">
+      VERIFY KEY →
+    </button>
+
+    <div id="loginMessage" class="message"></div>
+
+    <div class="notice">
+      🔒 Keep your access key private.
     </div>
   </section>
 
-  <section class="card">
-    <h2>🔗 USEFUL LINKS</h2>
-    <p class="desc">Open the proxy app or join our Telegram channel.</p>
-    <div class="links">
-      <a class="link play" href="https://play.google.com/store/apps/details?id=com.happproxy" target="_blank" rel="noopener noreferrer">▶ OPEN HAPPPROXY</a>
-      <a class="link telegram" href="https://t.me/Z4xbanmodz" target="_blank" rel="noopener noreferrer">✈ JOIN TELEGRAM</a>
-    </div>
-  </section>
+  <!-- MAIN PANEL -->
+  <div id="panel" class="hidden">
 
-  <footer>
-    <div>02 MODZ VIP PROXY PANEL</div>
-    <div>© 2026 02 MODZ</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">DEVICE LIMIT</div>
+        <div class="stat-value">2000 <small>DEVICES</small></div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">PANEL STATUS</div>
+        <div class="stat-value" style="font-size:17px;color:#00c8ff">
+          VIP ACCESS
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">VERSION</div>
+        <div class="stat-value">V2.0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">CONFIG STATUS</div>
+        <div class="stat-value" style="font-size:17px">READY</div>
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="card-title">⚡ CONTROL CENTER</div>
+
+      <div class="info-row">
+        <span>Panel Name</span>
+        <span>02 MODZ VIP</span>
+      </div>
+
+      <div class="info-row">
+        <span>Access Status</span>
+        <span class="blue-text">Verified locally</span>
+      </div>
+
+      <div class="info-row">
+        <span>Device capacity</span>
+        <span>2000 devices</span>
+      </div>
+
+      <div class="info-row">
+        <span>Configuration</span>
+        <span>Ready to copy</span>
+      </div>
+    </section>
+
+    <!-- PROXY CONFIGURATION -->
+    <section class="card">
+      <div class="card-title">📡 PROXY CONFIGURATION</div>
+
+      <p class="description">
+        Copy your configuration directly. The configuration text
+        will not be displayed on the page.
+      </p>
+
+      <button class="btn btn-blue" id="copyBtn">
+        ▣ COPY CONFIG
+      </button>
+
+      <button class="btn btn-dark" id="openHappBtn">
+        ↗ OPEN HAPP PROXY
+      </button>
+
+      <div id="copyMessage" class="message"></div>
+    </section>
+
+    <!-- KEY INFORMATION -->
+    <section class="card" id="accountSection">
+      <div class="card-title">👤 KEY INFORMATION</div>
+
+      <div class="info-row">
+        <span>Current session</span>
+        <span>This browser</span>
+      </div>
+
+      <div class="info-row">
+        <span>Key tracking</span>
+        <span>Not connected</span>
+      </div>
+
+      <div class="info-row">
+        <span>Devices used</span>
+        <span>Not recorded</span>
+      </div>
+
+      <div class="notice">
+        Device tracking and actual usage limits require a server
+        and database. The displayed 2000-device limit is not enforced
+        by this static webpage.
+      </div>
+    </section>
+
+    <!-- TELEGRAM -->
+    <section class="card">
+      <div class="card-title">🌐 OFFICIAL COMMUNITY</div>
+
+      <p class="description">
+        Visit the Telegram channel for announcements and updates.
+      </p>
+
+      <a class="btn btn-blue"
+         href="https://t.me/Z4xbanmodz"
+         target="_blank"
+         rel="noopener noreferrer">
+        ✈ JOIN TELEGRAM
+      </a>
+    </section>
+
+    <button class="btn btn-outline" id="logoutBtn">LOG OUT</button>
+  </div>
+
+  <footer class="footer">
+    <strong>02 MODZ VIP</strong><br>
+    PREMIUM ACCESS PANEL · V2.0<br>
+    Use only configurations you are authorized to use.
   </footer>
 </main>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
-const DEMO_KEY = "02-MODZ-9DAYS"
+"use strict";
 
-const proxyConfig = {
-  "dns": {
-    "hosts": {
-      "domain:googleapis.cn": "googleapis.com",
-      "dot.pub": ["1.12.12.12", "120.53.53.53"],
-      "dns.alidns.com": ["223.5.5.5", "223.6.6.6"],
-      "one.one.one.one": ["1.1.1.1", "1.0.0.1"],
-      "dns.google": ["8.8.8.8", "8.8.4.4"],
-      "dns.quad9.net": ["9.9.9.9", "149.112.112.112"]
-    },
-    "servers": ["8.8.8.8"]
-  },
-  "inbounds": [
-    {
-      "listen": "127.0.0.1",
-      "port": 10808,
-      "protocol": "socks",
-      "settings": {
-        "allowTransparent": false,
-        "auth": "noauth",
-        "udp": true
-      },
-      "tag": "socks"
-    },
-    {
-      "listen": "127.0.0.1",
-      "port": 10809,
-      "protocol": "http",
-      "settings": {},
-      "tag": "http"
-    }
-  ],
-  "log": {"loglevel": "warning"},
-  "outbounds": [
-    {
-      "protocol": "hysteria",
-      "settings": {
-        "address": "wraith-bom3.silentx.store",
-        "port": 443,
-        "version": 2
-      },
-      "streamSettings": {
-        "hysteriaSettings": {
-          "auth": "SLTX-2E9C-B28C-5464",
-          "version": 2
-        },
-        "network": "hysteria",
-        "security": "tls",
-        "tlsSettings": {
-          "alpn": ["h3"],
-          "serverName": "wraith-bom3.silentx.store",
-          "show": false
-        }
-      },
-      "tag": "proxy"
-    },
-    {
-      "protocol": "freedom",
-      "settings": {"domainStrategy": "UseIP"},
-      "tag": "direct"
-    },
-    {
-      "protocol": "blackhole",
-      "settings": {"response": {"type": "http"}},
-      "tag": "block"
-    }
-  ],
-  "remarks": "02MODZ-VIP",
-  "routing": {
-    "domainStrategy": "AsIs",
-    "rules": [
-      {
-        "ip": ["8.8.8.8"],
-        "outboundTag": "proxy",
-        "port": "53",
-        "type": "field"
-      },
-      {
-        "ip": ["223.5.5.5"],
-        "outboundTag": "direct",
-        "port": "53",
-        "type": "field"
-      }
-    ]
-  }
-};
+const ACCESS_KEY = "02MODZ-VIP-2026";
 
-const keyInput = document.getElementById("keyInput");
-const unlockBtn = document.getElementById("unlockBtn");
-const message = document.getElementById("message");
-const countdown = document.getElementById("countdown");
-const number = document.getElementById("number");
-const configSection = document.getElementById("configSection");
-const jsonOutput = document.getElementById("jsonOutput");
-const copyBtn = document.getElementById("copyBtn");
-const copyMessage = document.getElementById("copyMessage");
+/* Configuration is kept out of the visible page. */
+const CONFIG =
+"happ://crypt5/fzvdg0uAxSExGUapM2alAt1i24l1XQ8kZc2vsdRMZM5OasEylCo99/4/WETG71Mz8jNLpzGZ00WI9ceIEokyeB0MlVIaUJ8FsmIDvMOfWQT0HtiaM/bheLIjCW/vakf/9vOITnJcTzdDqsfb0YttTAz3QhAZKuiE6ZrefoOFlj5tYMcb4/Yz2EFB+fcy0CM94yJ7JfTixIw78K/E7rXj7gGJDcV2yjQSu7iC77yJ9k6SIaLZC4qkcSiLYgyk5HeJTfkC2TKCV+3uA9E2NQ1JH/==q084ZaDUbEHFEMjJIaXx0U6ZbP5Js0Connachlwz7uv3n/Ktkx8dI24ncRtKgj6PZWhqFfuSnOo5pqIt82fre+eqz0A0oFmy6SyflX05nm9OKRtWlHl8R0W0ytnDTOi9fhaMbOFkDYMNkI2fpL04N1GZ672Qp8+nTFGmXvclwHT9pe9josbds/mGWLBwGW+m3cGXX0ulExULirKzVD6euGo/AfviyfCpQnJeOtq6ZTpzfeYH9GZbtki2H2zXfNEyHcE+kJldOBfRyof2s9s6PWHo5NTngsA8J37s+G29gBN2E0OLe9effF64H02o82oDEvC/cNYLx4bsqBiJ63hpmE9Zr5iQnd3qM5FqDtzgMaQLrJKhcCSua5rBp/hLWqsQ4AA9cuxTflu6lqxYp5LFM6aKpke/KjkqcU9Ub81AiIZDUfkK5vMil2uXR1fFFhRg1tjavs0MsRbRvjspBhlKTmzuYTc5KQJQzLgkUw9oug/FIjhqW4GbeMWi/74k8ye+Bpx4sA3/Po43DKdlaPMZVPc3nWfRoGWbdyc12kiyl3BAVA/rFnyDaAACMNW5vuQdz2EGh1Ggdsn63ZhXXEQfsjQXmFteVaIN3awmlSF5TG+qKUqAuF9/otoKpzRmgYv51rnSG3uYo2e/EoaD3CY5L7l+vKwbN90Ay2D/rTRrfow=ff";
 
-jsonOutput.textContent = JSON.stringify(proxyConfig, null, 2);
+const $ = id => document.getElementById(id);
 
-let busy = false;
-
-function unlockConfig() {
-  if (busy) return;
-
-  if (!keyInput.value.trim()) {
-    message.textContent = "Please enter your key.";
-    keyInput.focus();
-    return;
-  }
-
-  if (keyInput.value.trim() !== DEMO_KEY) {
-    message.textContent = "Invalid key. Please try again.";
-    return;
-  }
-
-  busy = true;
-  unlockBtn.disabled = true;
-  message.textContent = "Key accepted!";
-  countdown.style.display = "block";
-
-  let remaining = 5;
-  number.textContent = remaining;
-
-  const timer = setInterval(() => {
-    remaining--;
-    number.textContent = remaining;
-
-    if (remaining <= 0) {
-      clearInterval(timer);
-      countdown.style.display = "none";
-      configSection.style.display = "block";
-      message.textContent = "Configuration is ready!";
-      unlockBtn.disabled = false;
-      busy = false;
-      configSection.scrollIntoView({behavior: "smooth", block: "start"});
-    }
-  }, 1000);
+function notify(text) {
+  const toast = $("toast");
+  toast.textContent = text;
+  toast.classList.add("show");
+  clearTimeout(notify.timer);
+  notify.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2400);
 }
 
-unlockBtn.addEventListener("click", unlockConfig);
+function showMessage(el, text, type) {
+  el.textContent = text;
+  el.className = "message " + type;
+}
 
-keyInput.addEventListener("keydown", event => {
-  if (event.key === "Enter") unlockConfig();
+function verifyKey() {
+  const entered = $("keyInput").value.trim();
+
+  if (!entered) {
+    showMessage($("loginMessage"), "Please enter your VIP key.", "error");
+    return;
+  }
+
+  if (entered !== ACCESS_KEY) {
+    showMessage($("loginMessage"), "Invalid key. Please try again.", "error");
+    return;
+  }
+
+  $("loginCard").classList.add("hidden");
+  $("panel").classList.remove("hidden");
+  $("keyInput").value = "";
+  notify("Welcome to 02 MODZ VIP");
+}
+
+$("verifyBtn").addEventListener("click", verifyKey);
+
+$("keyInput").addEventListener("keydown", event => {
+  if (event.key === "Enter") verifyKey();
 });
 
-copyBtn.addEventListener("click", async () => {
-  const textToCopy = JSON.stringify(proxyConfig, null, 2);
+async function copyConfig() {
+  const button = $("copyBtn");
+  const message = $("copyMessage");
+
+  button.disabled = true;
+  button.textContent = "COPYING...";
 
   try {
-    await navigator.clipboard.writeText(textToCopy);
-    copyMessage.textContent = "✓ CONFIG COPIED SUCCESSFULLY!";
-    copyMessage.style.display = "block";
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(CONFIG);
+    } else {
+      const temp = document.createElement("textarea");
+      temp.value = CONFIG;
+      temp.readOnly = true;
+      temp.style.position = "fixed";
+      temp.style.left = "-9999px";
+      temp.style.top = "0";
+      temp.style.opacity = "0";
+
+      document.body.appendChild(temp);
+      temp.select();
+      temp.setSelectionRange(0, temp.value.length);
+
+      const success = document.execCommand("copy");
+      temp.remove();
+
+      if (!success) throw new Error("Copy failed");
+    }
+
+    showMessage(message, "✓ Configuration copied successfully.", "success");
+    notify("✓ Config copied");
   } catch (error) {
-    const area = document.createElement("textarea");
-    area.value = textToCopy;
-    area.style.position = "fixed";
-    area.style.left = "-9999px";
-    document.body.appendChild(area);
-    area.select();
-
-    let copied = false;
-    try {
-      copied = document.execCommand("copy");
-    } catch (e) {}
-
-    area.remove();
-    copyMessage.textContent = copied
-      ? "✓ CONFIG COPIED SUCCESSFULLY!"
-      : "Copy failed. Select the JSON text and copy manually.";
-    copyMessage.style.display = "block";
+    showMessage(
+      message,
+      "Copy blocked by browser. Try opening the page in a secure context.",
+      "error"
+    );
+  } finally {
+    button.disabled = false;
+    button.textContent = "▣ COPY CONFIG";
   }
+}
+
+$("copyBtn").addEventListener("click", copyConfig);
+
+$("openHappBtn").addEventListener("click", () => {
+  window.location.href = CONFIG;
 });
 
-/* Falling rain animation */
-const canvas = document.getElementById("rain");
-const ctx = canvas.getContext("2d");
-let width = 0, height = 0, drops = [];
-
-function resizeRain() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  width = window.innerWidth;
-  height = window.innerHeight;
-  canvas.width = Math.floor(width * dpr);
-  canvas.height = Math.floor(height * dpr);
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  const count = Math.min(150, Math.floor(width / 3));
-  drops = Array.from({length: count}, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    length: 8 + Math.random() * 18,
-    speed: 4 + Math.random() * 7,
-    opacity: .15 + Math.random() * .45
-  }));
-}
-
-function drawRain() {
-  ctx.clearRect(0, 0, width, height);
-
-  for (const drop of drops) {
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(255,50,50,${drop.opacity})`;
-    ctx.lineWidth = 1;
-    ctx.moveTo(drop.x, drop.y);
-    ctx.lineTo(drop.x - 3, drop.y + drop.length);
-    ctx.stroke();
-
-    drop.y += drop.speed;
-    drop.x -= 1;
-
-    if (drop.y > height) {
-      drop.y = -drop.length;
-      drop.x = Math.random() * width;
-    }
-    if (drop.x < -10) drop.x = width + 5;
-  }
-
-  requestAnimationFrame(drawRain);
-}
-
-window.addEventListener("resize", resizeRain);
-resizeRain();
-drawRain();
+$("logoutBtn").addEventListener("click", () => {
+  $("panel").classList.add("hidden");
+  $("loginCard").classList.remove("hidden");
+  $("loginMessage").className = "message";
+  $("loginMessage").textContent = "";
+  $("copyMessage").className = "message";
+  $("copyMessage").textContent = "";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  notify("Logged out");
+});
 </script>
 </body>
 </html>
