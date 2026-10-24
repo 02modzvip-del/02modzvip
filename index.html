@@ -9,359 +9,387 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
+:root{
+  --cyan:#00eaff;
+  --blue:#087bff;
+  --dark:#020612;
+}
+
 body{
   min-height:100vh;
+  font-family:Arial,sans-serif;
+  background:var(--dark);
+  color:white;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:22px;
-  overflow:hidden;
-  font-family:Arial,sans-serif;
-  color:white;
-  background:#050615;
+  overflow-x:hidden;
+  padding:75px 15px 30px;
 }
 
-body:before{
+body::before{
   content:"";
   position:fixed;
-  inset:-50%;
-  background:conic-gradient(
-    transparent,#132cff,#00d9ff,
-    transparent,#7b00ff,transparent
+  width:150vw;
+  height:150vw;
+  min-width:700px;
+  min-height:700px;
+  border-radius:50%;
+  background:repeating-radial-gradient(
+    circle,
+    transparent 0 35px,
+    #007bff55 37px 40px,
+    transparent 43px 65px
   );
-  opacity:.24;
-  animation:bg 12s linear infinite;
+  animation:rotate 16s linear infinite;
+  z-index:-2;
 }
 
-@keyframes bg{
-  to{transform:rotate(360deg)}
-}
-
-.stars{
+body::after{
+  content:"";
   position:fixed;
   inset:0;
+  background:
+    radial-gradient(ellipse at 50% 30%,#003d8055,transparent 60%),
+    radial-gradient(ellipse at 50% 100%,#00d9ff22,transparent 50%);
+  z-index:-1;
   pointer-events:none;
-  background-image:
-    radial-gradient(#fff 1px,transparent 1px),
-    radial-gradient(#00d9ff 1px,transparent 1px);
-  background-size:47px 47px,83px 83px;
-  background-position:0 0,30px 50px;
-  opacity:.22;
+}
+
+@keyframes rotate{
+  from{transform:rotate(0deg) scale(1)}
+  to{transform:rotate(360deg) scale(1.08)}
+}
+
+.topbar{
+  position:absolute;
+  top:18px;
+  left:18px;
+  right:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.owner{
+  border:1px solid var(--cyan);
+  padding:10px 14px;
+  border-radius:30px;
+  color:var(--cyan);
+  font-size:12px;
+  font-weight:bold;
+  box-shadow:0 0 15px #00eaff33;
+}
+
+.settings{
+  width:43px;
+  height:43px;
+  border:1px solid var(--cyan);
+  background:#06162a;
+  color:var(--cyan);
+  border-radius:13px;
+  font-size:23px;
+  cursor:pointer;
 }
 
 .card{
   width:100%;
   max-width:390px;
-  padding:27px 21px;
-  position:relative;
-  z-index:2;
+  padding:30px 22px;
   text-align:center;
-  background:rgba(8,13,34,.94);
-  border:1px solid #176aff;
-  border-radius:23px;
-  box-shadow:0 0 35px #075bff40;
+  background:rgba(3,12,29,.94);
+  border:1px solid #00cfff;
+  border-radius:24px;
+  box-shadow:
+    0 0 22px #007bff44,
+    inset 0 0 25px #007bff11;
+  position:relative;
 }
 
 .logo{
-  width:83px;
-  height:83px;
-  margin:0 auto 17px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border:2px solid #00e5ff;
+  width:90px;
+  height:90px;
+  margin:0 auto 20px;
+  border:2px solid var(--cyan);
   border-radius:50%;
-  color:#00e5ff;
-  font-size:29px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:37px;
   font-weight:900;
-  box-shadow:0 0 25px #00cfff55;
+  color:white;
+  text-shadow:0 0 15px var(--cyan);
+  box-shadow:0 0 25px #00d9ff66;
+  animation:pulse 2s infinite alternate;
+}
+
+@keyframes pulse{
+  from{box-shadow:0 0 10px #00d9ff44}
+  to{box-shadow:0 0 30px #00d9ffaa}
 }
 
 h1{
-  color:#00dfff;
-  font-size:28px;
+  font-size:27px;
   letter-spacing:2px;
-  text-shadow:0 0 15px #00bfff55;
+  margin-bottom:12px;
 }
 
-.sub{
-  color:#9aabc9;
-  font-size:11px;
-  letter-spacing:2px;
-  margin:10px 0 26px;
+h1 span{color:var(--cyan)}
+
+.subtitle{
+  color:#8da9cc;
+  font-size:12px;
+  letter-spacing:3px;
+  margin-bottom:28px;
 }
 
-.progress{
+input{
+  width:100%;
+  padding:16px;
+  background:#061328;
+  border:1px solid #087bff;
+  border-radius:12px;
+  color:white;
+  font-size:15px;
+  outline:none;
+  margin-bottom:14px;
+}
+
+input:focus{
+  border-color:var(--cyan);
+  box-shadow:0 0 15px #00eaff33;
+}
+
+button{font-family:inherit}
+
+.unlock{
+  width:100%;
+  padding:16px;
+  background:linear-gradient(100deg,#086bff,#00d9ff);
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+  letter-spacing:1px;
+  border:0;
+  border-radius:12px;
+  cursor:pointer;
+  box-shadow:0 0 20px #008cff55;
+}
+
+#message{
+  min-height:18px;
+  margin-top:12px;
+  font-size:12px;
+  color:var(--cyan);
+}
+
+.or{
   display:flex;
   align-items:center;
-  justify-content:center;
-  gap:8px;
-  margin-bottom:23px;
-}
-
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#263858;
-  box-shadow:0 0 0 4px #26385830;
-}
-
-.dot.active{
-  background:#00e5ff;
-  box-shadow:0 0 12px #00e5ff;
-}
-
-.line{
-  height:2px;
-  width:48px;
-  background:#263858;
-}
-
-.step{
-  animation:appear .45s ease;
-}
-
-@keyframes appear{
-  from{opacity:0;transform:translateY(12px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-.step h2{
-  font-size:18px;
-  margin-bottom:10px;
-}
-
-.step p{
+  gap:15px;
+  margin:22px 0;
+  color:#7da5d8;
   font-size:12px;
-  line-height:1.7;
-  color:#9daecc;
-  margin-bottom:20px;
 }
 
-.join{
-  display:block;
-  width:100%;
+.or::before,.or::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:#164875;
+}
+
+.telegram{
+  display:flex;
+  align-items:center;
+  gap:13px;
   padding:15px;
-  border:0;
-  border-radius:11px;
-  color:white;
-  font-size:14px;
-  font-weight:bold;
+  border:1px solid #00bfff;
+  border-radius:15px;
   text-decoration:none;
-  cursor:pointer;
+  color:white;
   transition:.2s;
 }
 
-.join:active{transform:scale(.97)}
+.telegram:active{transform:scale(.97)}
 
-.tg{
-  background:linear-gradient(100deg,#0878ff,#00cfff);
-  box-shadow:0 5px 20px #008cff30;
-}
-
-.wa{
-  background:linear-gradient(100deg,#087c48,#13c779);
-  box-shadow:0 5px 20px #00c87825;
-}
-
-.small{
-  font-size:10px!important;
-  color:#7083a8!important;
-  margin:15px 0 0!important;
-}
-
-#loading,#result{display:none}
-
-.spinner{
-  width:48px;
-  height:48px;
-  border:4px solid #1d2c4b;
-  border-top-color:#00e5ff;
-  border-right-color:#0878ff;
+.tg-icon{
+  width:45px;
+  height:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#079de0;
   border-radius:50%;
-  margin:8px auto 20px;
-  animation:spin .75s linear infinite;
+  font-size:23px;
 }
 
-@keyframes spin{
-  to{transform:rotate(360deg)}
+.tg-text{
+  flex:1;
+  text-align:left;
 }
 
-.loading-text{
-  color:#00e5ff;
-  font-size:13px;
-  font-weight:bold;
-}
+.tg-text strong{display:block;font-size:15px}
+.tg-text small{display:block;color:#88b8e8;margin-top:5px}
 
-.key{
-  padding:17px 8px;
-  margin:17px 0 12px;
-  border:1px dashed #00e5ff;
-  border-radius:12px;
-  background:#030918;
-  color:#00e5ff;
-  font-size:21px;
-  font-weight:bold;
-  overflow-wrap:anywhere;
-  box-shadow:inset 0 0 20px #00d9ff0c;
-}
-
-.copy{
-  background:linear-gradient(100deg,#075dff,#00bfff);
-}
+.arrow{color:var(--cyan);font-size:22px}
 
 .footer{
-  color:#526589;
-  font-size:10px;
   margin-top:25px;
+  font-size:10px;
+  letter-spacing:4px;
+  color:#00cfff;
+}
+
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000b;
+  z-index:10;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.popup-box{
+  width:100%;
+  max-width:320px;
+  padding:25px;
+  text-align:center;
+  background:#07152b;
+  border:1px solid var(--cyan);
+  border-radius:18px;
+  box-shadow:0 0 30px #007bff55;
+}
+
+.popup-box h2{
+  color:var(--cyan);
+  margin-bottom:18px;
+}
+
+.popup-box p{
+  margin:12px 0;
+  color:white;
+}
+
+.close{
+  width:100%;
+  padding:12px;
+  background:#087bff;
+  color:white;
+  border:0;
+  border-radius:10px;
+  margin-top:15px;
+  cursor:pointer;
+}
+
+@media(max-height:650px){
+  body{align-items:flex-start}
 }
 </style>
 </head>
 
 <body>
-<div class="stars"></div>
+
+<div class="topbar">
+  <div class="owner">♛ OWNER : @Stylex77</div>
+  <button class="settings" id="settingsBtn"
+    aria-label="Settings">⚙</button>
+</div>
 
 <main class="card">
+
   <div class="logo">02</div>
-  <h1>02 MODZ VIP</h1>
-  <p class="sub">PREMIUM KEY ACCESS</p>
 
-  <div class="progress">
-    <span class="dot active" id="dot1"></span>
-    <span class="line"></span>
-    <span class="dot" id="dot2"></span>
-    <span class="line"></span>
-    <span class="dot" id="dot3"></span>
-  </div>
+  <h1>02 MODZ <span>VIP</span></h1>
+  <p class="subtitle">ENTER YOUR ACCESS KEY</p>
 
-  <section class="step" id="telegramStep">
-    <h2>✈ TELEGRAM JOIN</h2>
-    <p>
-      Step 01 / Join our official Telegram channel
-      to continue to the next step.
-    </p>
+  <form id="keyForm">
+    <input
+      id="keyInput"
+      type="password"
+      placeholder="🔑 Enter your key..."
+      autocomplete="off"
+      required
+    >
 
-    <a class="join tg"
-       href="https://t.me/Z4xbanmodz"
-       target="_blank"
-       rel="noopener"
-       id="telegramBtn">
-       ✈ JOIN TELEGRAM
-    </a>
-
-    <p class="small">STEP 01 OF 03</p>
-  </section>
-
-  <section class="step" id="whatsappStep"
-           style="display:none">
-    <h2>🟢 WHATSAPP JOIN</h2>
-    <p>
-      Step 02 / Join our official WhatsApp channel
-      to reveal your VIP key.
-    </p>
-
-    <a class="join wa"
-       href="https://whatsapp.com/channel/0029VbDdRTs1SWt62hbSl70i"
-       target="_blank"
-       rel="noopener"
-       id="whatsappBtn">
-       🟢 JOIN WHATSAPP
-    </a>
-
-    <p class="small">STEP 02 OF 03</p>
-  </section>
-
-  <section id="loading">
-    <div class="spinner"></div>
-    <h2 class="loading-text">PLEASE WAIT...</h2>
-    <p class="small">PREPARING YOUR VIP ACCESS KEY</p>
-  </section>
-
-  <section id="result">
-    <h2 style="color:#00e5ff">✓ KEY UNLOCKED</h2>
-    <p class="small">YOUR VIP ACCESS KEY</p>
-
-    <div class="key">02-VIP-2026</div>
-
-    <button class="join copy" id="copyBtn">
-      COPY VIP KEY
+    <button class="unlock" type="submit">
+      UNLOCK ACCESS &nbsp; ↗
     </button>
+  </form>
 
-    <p id="message" class="small"></p>
-  </section>
+  <div id="message" aria-live="polite"></div>
 
-  <div class="footer">© 2026 02 MODZ • VIP SYSTEM</div>
+  <div class="or">OR JOIN US</div>
+
+  <a class="telegram"
+     href="https://t.me/Z4xbanmodz"
+     target="_blank"
+     rel="noopener noreferrer">
+
+    <div class="tg-icon">➤</div>
+
+    <div class="tg-text">
+      <strong>Telegram</strong>
+      <small>Join Our Channel</small>
+    </div>
+
+    <div class="arrow">→</div>
+  </a>
+
+  <div class="footer">02 MODZ • VIP ACCESS</div>
+
 </main>
 
+<div class="popup" id="settingsPopup">
+  <div class="popup-box">
+    <h2>⚙ SETTINGS</h2>
+    <p>OWNER : <strong>@Stylex77</strong></p>
+    <p>PROJECT : 02 MODZ VIP</p>
+    <button class="close" id="closeBtn">CLOSE</button>
+  </div>
+</div>
+
 <script>
-const telegramStep = document.getElementById("telegramStep");
-const whatsappStep = document.getElementById("whatsappStep");
-const loading = document.getElementById("loading");
-const result = document.getElementById("result");
+const destination =
+"https://dripwire.cc/config.php?key=2430986274&server=ind&tab=setup";
 
-const dot1 = document.getElementById("dot1");
-const dot2 = document.getElementById("dot2");
-const dot3 = document.getElementById("dot3");
+const form = document.getElementById("keyForm");
+const keyInput = document.getElementById("keyInput");
+const message = document.getElementById("message");
 
-let telegramClicked = false;
-let whatsappClicked = false;
+form.addEventListener("submit", function(e){
+  e.preventDefault();
 
-document.getElementById("telegramBtn")
-.addEventListener("click", function(){
-  if(telegramClicked) return;
+  const key = keyInput.value.trim();
 
-  telegramClicked = true;
+  if(!key){
+    message.textContent = "Please enter your key!";
+    return;
+  }
 
-  setTimeout(function(){
-    telegramStep.style.display = "none";
-    whatsappStep.style.display = "block";
-    dot1.classList.remove("active");
-    dot2.classList.add("active");
-  }, 300);
+  message.textContent = "Connecting...";
+
+  window.location.href = destination;
 });
 
-document.getElementById("whatsappBtn")
-.addEventListener("click", function(){
-  if(!telegramClicked || whatsappClicked) return;
+const popup = document.getElementById("settingsPopup");
 
-  whatsappClicked = true;
+document.getElementById("settingsBtn").onclick = function(){
+  popup.style.display = "flex";
+};
 
-  setTimeout(function(){
-    whatsappStep.style.display = "none";
-    loading.style.display = "block";
+document.getElementById("closeBtn").onclick = function(){
+  popup.style.display = "none";
+};
 
-    dot2.classList.remove("active");
-    dot3.classList.add("active");
-
-    setTimeout(function(){
-      loading.style.display = "none";
-      result.style.display = "block";
-    }, 3000);
-  }, 300);
-});
-
-document.getElementById("copyBtn")
-.addEventListener("click", async function(){
-  const key = "02-VIP-2026";
-  const message = document.getElementById("message");
-
-  try{
-    await navigator.clipboard.writeText(key);
-    message.textContent = "✓ KEY COPIED SUCCESSFULLY!";
-  }catch(e){
-    const input = document.createElement("textarea");
-    input.value = key;
-    document.body.appendChild(input);
-    input.select();
-    const ok = document.execCommand("copy");
-    input.remove();
-
-    message.textContent = ok
-      ? "✓ KEY COPIED SUCCESSFULLY!"
-      : "Please copy: " + key;
+popup.addEventListener("click", function(e){
+  if(e.target === popup){
+    popup.style.display = "none";
   }
 });
 </script>
+
 </body>
 </html>
