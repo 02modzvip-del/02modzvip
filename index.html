@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 VIP KEY PANEL</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #050510;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 170vw;
+  height: 170vw;
+  max-width: 1100px;
+  max-height: 1100px;
+  background: conic-gradient(
+    #ff004c, #7000ff, #00eaff,
+    #00ff80, #ffcc00, #ff004c
+  );
+  animation: spin 7s linear infinite;
+  filter: blur(100px);
+  opacity: 0.28;
+  z-index: -1;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.panel {
+  width: 100%;
+  max-width: 390px;
+  padding: 28px 22px;
+  border: 1px solid #00eaff;
+  border-radius: 22px;
+  background: rgba(8, 8, 25, 0.93);
+  box-shadow: 0 0 25px #00d9ff55;
+  text-align: center;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 12px #00eaff44; }
+  to { box-shadow: 0 0 30px #a000ff88; }
+}
+
+.logo {
+  width: 85px;
+  height: 85px;
+  margin: 0 auto 18px;
+  border: 3px solid #00eaff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 900;
+  color: #00eaff;
+  animation: spin 8s linear infinite;
+}
+
+h1 {
+  font-size: 27px;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  color: #00eaff;
+}
+
+.subtitle {
+  color: #aaaacc;
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 13px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.start {
+  color: #050510;
+  background: linear-gradient(90deg, #00eaff, #a855ff);
+}
+
+.telegram {
+  background: #168bd2;
+  color: white;
+}
+
+.whatsapp {
+  background: #13bd67;
+  color: white;
+}
+
+.status {
+  color: #00eaff;
+  margin-top: 18px;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.keybox {
+  border: 1px solid #00eaff;
+  border-radius: 12px;
+  padding: 18px 12px;
+  margin-top: 18px;
+  background: #00eaff0c;
+}
+
+.keybox p {
+  margin: 12px 0;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.key {
+  color: #00ff91;
+  font-weight: bold;
+  font-size: 22px !important;
+}
+
+.password {
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 22px !important;
+}
+
+.copy {
+  color: #080814;
+  background: #00eaff;
+}
+
+.note {
+  font-size: 11px;
+  color: #8888aa;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+<div class="panel">
+
+  <div class="logo">02 VIP</div>
+
+  <h1>02 VIP</h1>
+  <p class="subtitle">PREMIUM KEY ACCESS PANEL</p>
+
+  <section id="home">
+    <button class="start" onclick="startPanel()">
+      🚀 START
+    </button>
+  </section>
+
+  <section id="telegramSection" class="hidden">
+    <p>STEP 1 — JOIN TELEGRAM</p>
+    <button class="telegram" onclick="joinTelegram()">
+      ✈️ TELEGRAM JOIN
+    </button>
+    <p class="status" id="telegramStatus">
+      Join our Telegram channel
+    </p>
+  </section>
+
+  <section id="whatsappSection" class="hidden">
+    <p>STEP 2 — JOIN WHATSAPP</p>
+    <button class="whatsapp" onclick="joinWhatsApp()">
+      💚 WHATSAPP JOIN
+    </button>
+    <p class="status" id="whatsappStatus">
+      Join our WhatsApp channel
+    </p>
+  </section>
+
+  <section id="keySection" class="hidden">
+    <h2 style="color:#00eaff">🎉 YOUR ACCESS DETAILS</h2>
+
+    <div class="keybox">
+      <p>KEY :</p>
+      <p class="key" id="keyValue">02 VIP</p>
+
+      <p>PASSWORD :</p>
+      <p class="password" id="passwordValue">6902</p>
+    </div>
+
+    <button class="copy" onclick="copyDetails()">
+      📋 COPY KEY & PASSWORD
+    </button>
+
+    <p class="status" id="copyStatus"></p>
+  </section>
+
+  <p class="note">POWERED BY 02 VIP</p>
+</div>
+
+<script>
+let telegramTimer = null;
+let telegramDone = false;
+let whatsappDone = false;
+let seconds = 5;
+
+function startPanel() {
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("telegramSection")
+    .classList.remove("hidden");
+}
+
+function joinTelegram() {
+  if (telegramTimer !== null) return;
+
+  window.open(
+    "https://t.me/Z4xbanmod",
+    "_blank"
+  );
+
+  seconds = 5;
+  const status = document.getElementById("telegramStatus");
+  status.textContent = "Please wait " + seconds + " seconds...";
+
+  telegramTimer = setInterval(function() {
+    seconds--;
+
+    if (seconds > 0) {
+      status.textContent =
+        "Please wait " + seconds + " seconds...";
+    } else {
+      clearInterval(telegramTimer);
+      telegramTimer = null;
+      telegramDone = true;
+
+      status.textContent = "Telegram step completed!";
+      document.getElementById("whatsappSection")
+        .classList.remove("hidden");
+      document.getElementById("whatsappSection")
+        .scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, 1000);
+}
+
+function joinWhatsApp() {
+  window.open(
+    "https://whatsapp.com/channel/0029VbDdRTs1SWt62hbSl70i",
+    "_blank"
+  );
+
+  whatsappDone = true;
+
+  document.getElementById("whatsappStatus")
+    .textContent = "WhatsApp step completed!";
+
+  document.getElementById("keySection")
+    .classList.remove("hidden");
+
+  document.getElementById("keySection")
+    .scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function copyDetails() {
+  const details = "KEY: 02 VIP\nPASSWORD: 6902";
+  const status = document.getElementById("copyStatus");
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(details)
+      .then(function() {
+        status.textContent = "Copied successfully!";
+      })
+      .catch(function() {
+        fallbackCopy(details, status);
+      });
+  } else {
+    fallbackCopy(details, status);
+  }
+}
+
+function fallbackCopy(text, status) {
+  const area = document.createElement("textarea");
+  area.value = text;
+  document.body.appendChild(area);
+  area.select();
+
+  try {
+    document.execCommand("copy");
+    status.textContent = "Copied successfully!";
+  } catch (e) {
+    status.textContent = text;
+  }
+
+  area.remove();
+}
+</script>
+</body>
+</html>
