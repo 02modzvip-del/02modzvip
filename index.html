@@ -4,392 +4,325 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>02 MODZ VIP</title>
+<title>02 VIP KEY PANEL</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --cyan:#00eaff;
-  --blue:#087bff;
-  --dark:#020612;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-  min-height:100vh;
-  font-family:Arial,sans-serif;
-  background:var(--dark);
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow-x:hidden;
-  padding:75px 15px 30px;
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #050510;
+  overflow-x: hidden;
+  position: relative;
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  width:150vw;
-  height:150vw;
-  min-width:700px;
-  min-height:700px;
-  border-radius:50%;
-  background:repeating-radial-gradient(
-    circle,
-    transparent 0 35px,
-    #007bff55 37px 40px,
-    transparent 43px 65px
+body::before {
+  content: "";
+  position: fixed;
+  width: 170vw;
+  height: 170vw;
+  max-width: 1100px;
+  max-height: 1100px;
+  background: conic-gradient(
+    #ff004c, #7000ff, #00eaff,
+    #00ff80, #ffcc00, #ff004c
   );
-  animation:rotate 16s linear infinite;
-  z-index:-2;
+  animation: spin 7s linear infinite;
+  filter: blur(100px);
+  opacity: 0.28;
+  z-index: -1;
 }
 
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(ellipse at 50% 30%,#003d8055,transparent 60%),
-    radial-gradient(ellipse at 50% 100%,#00d9ff22,transparent 50%);
-  z-index:-1;
-  pointer-events:none;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-@keyframes rotate{
-  from{transform:rotate(0deg) scale(1)}
-  to{transform:rotate(360deg) scale(1.08)}
+.panel {
+  width: 100%;
+  max-width: 390px;
+  padding: 28px 22px;
+  border: 1px solid #00eaff;
+  border-radius: 22px;
+  background: rgba(8, 8, 25, 0.93);
+  box-shadow: 0 0 25px #00d9ff55;
+  text-align: center;
+  animation: glow 3s infinite alternate;
 }
 
-.topbar{
-  position:absolute;
-  top:18px;
-  left:18px;
-  right:18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+@keyframes glow {
+  from { box-shadow: 0 0 12px #00eaff44; }
+  to { box-shadow: 0 0 30px #a000ff88; }
 }
 
-.owner{
-  border:1px solid var(--cyan);
-  padding:10px 14px;
-  border-radius:30px;
-  color:var(--cyan);
-  font-size:12px;
-  font-weight:bold;
-  box-shadow:0 0 15px #00eaff33;
+.logo {
+  width: 85px;
+  height: 85px;
+  margin: 0 auto 18px;
+  border: 3px solid #00eaff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 900;
+  color: #00eaff;
+  animation: spin 8s linear infinite;
 }
 
-.settings{
-  width:43px;
-  height:43px;
-  border:1px solid var(--cyan);
-  background:#06162a;
-  color:var(--cyan);
-  border-radius:13px;
-  font-size:23px;
-  cursor:pointer;
+h1 {
+  font-size: 27px;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  color: #00eaff;
 }
 
-.card{
-  width:100%;
-  max-width:390px;
-  padding:30px 22px;
-  text-align:center;
-  background:rgba(3,12,29,.94);
-  border:1px solid #00cfff;
-  border-radius:24px;
-  box-shadow:
-    0 0 22px #007bff44,
-    inset 0 0 25px #007bff11;
-  position:relative;
+.subtitle {
+  color: #aaaacc;
+  font-size: 12px;
+  margin-bottom: 25px;
 }
 
-.logo{
-  width:90px;
-  height:90px;
-  margin:0 auto 20px;
-  border:2px solid var(--cyan);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:37px;
-  font-weight:900;
-  color:white;
-  text-shadow:0 0 15px var(--cyan);
-  box-shadow:0 0 25px #00d9ff66;
-  animation:pulse 2s infinite alternate;
+button {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 13px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
 }
 
-@keyframes pulse{
-  from{box-shadow:0 0 10px #00d9ff44}
-  to{box-shadow:0 0 30px #00d9ffaa}
+button:active {
+  transform: scale(0.96);
 }
 
-h1{
-  font-size:27px;
-  letter-spacing:2px;
-  margin-bottom:12px;
+.start {
+  color: #050510;
+  background: linear-gradient(90deg, #00eaff, #a855ff);
 }
 
-h1 span{color:var(--cyan)}
-
-.subtitle{
-  color:#8da9cc;
-  font-size:12px;
-  letter-spacing:3px;
-  margin-bottom:28px;
+.telegram {
+  background: #168bd2;
+  color: white;
 }
 
-input{
-  width:100%;
-  padding:16px;
-  background:#061328;
-  border:1px solid #087bff;
-  border-radius:12px;
-  color:white;
-  font-size:15px;
-  outline:none;
-  margin-bottom:14px;
+.whatsapp {
+  background: #13bd67;
+  color: white;
 }
 
-input:focus{
-  border-color:var(--cyan);
-  box-shadow:0 0 15px #00eaff33;
+.status {
+  color: #00eaff;
+  margin-top: 18px;
+  font-size: 13px;
+  min-height: 18px;
 }
 
-button{font-family:inherit}
-
-.unlock{
-  width:100%;
-  padding:16px;
-  background:linear-gradient(100deg,#086bff,#00d9ff);
-  color:white;
-  font-size:15px;
-  font-weight:bold;
-  letter-spacing:1px;
-  border:0;
-  border-radius:12px;
-  cursor:pointer;
-  box-shadow:0 0 20px #008cff55;
+.hidden {
+  display: none !important;
 }
 
-#message{
-  min-height:18px;
-  margin-top:12px;
-  font-size:12px;
-  color:var(--cyan);
+.keybox {
+  border: 1px solid #00eaff;
+  border-radius: 12px;
+  padding: 18px 12px;
+  margin-top: 18px;
+  background: #00eaff0c;
 }
 
-.or{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin:22px 0;
-  color:#7da5d8;
-  font-size:12px;
+.keybox p {
+  margin: 12px 0;
+  font-size: 16px;
+  overflow-wrap: anywhere;
 }
 
-.or::before,.or::after{
-  content:"";
-  flex:1;
-  height:1px;
-  background:#164875;
+.key {
+  color: #00ff91;
+  font-weight: bold;
+  font-size: 22px !important;
 }
 
-.telegram{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:15px;
-  border:1px solid #00bfff;
-  border-radius:15px;
-  text-decoration:none;
-  color:white;
-  transition:.2s;
+.password {
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 22px !important;
 }
 
-.telegram:active{transform:scale(.97)}
-
-.tg-icon{
-  width:45px;
-  height:45px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#079de0;
-  border-radius:50%;
-  font-size:23px;
+.copy {
+  color: #080814;
+  background: #00eaff;
 }
 
-.tg-text{
-  flex:1;
-  text-align:left;
-}
-
-.tg-text strong{display:block;font-size:15px}
-.tg-text small{display:block;color:#88b8e8;margin-top:5px}
-
-.arrow{color:var(--cyan);font-size:22px}
-
-.footer{
-  margin-top:25px;
-  font-size:10px;
-  letter-spacing:4px;
-  color:#00cfff;
-}
-
-.popup{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000b;
-  z-index:10;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
-}
-
-.popup-box{
-  width:100%;
-  max-width:320px;
-  padding:25px;
-  text-align:center;
-  background:#07152b;
-  border:1px solid var(--cyan);
-  border-radius:18px;
-  box-shadow:0 0 30px #007bff55;
-}
-
-.popup-box h2{
-  color:var(--cyan);
-  margin-bottom:18px;
-}
-
-.popup-box p{
-  margin:12px 0;
-  color:white;
-}
-
-.close{
-  width:100%;
-  padding:12px;
-  background:#087bff;
-  color:white;
-  border:0;
-  border-radius:10px;
-  margin-top:15px;
-  cursor:pointer;
-}
-
-@media(max-height:650px){
-  body{align-items:flex-start}
+.note {
+  font-size: 11px;
+  color: #8888aa;
+  margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
+<div class="panel">
 
-<div class="topbar">
-  <div class="owner">♛ OWNER : @Stylex77</div>
-  <button class="settings" id="settingsBtn"
-    aria-label="Settings">⚙</button>
-</div>
+  <div class="logo">02 VIP</div>
 
-<main class="card">
+  <h1>02 VIP</h1>
+  <p class="subtitle">PREMIUM KEY ACCESS PANEL</p>
 
-  <div class="logo">02</div>
-
-  <h1>02 MODZ <span>VIP</span></h1>
-  <p class="subtitle">ENTER YOUR ACCESS KEY</p>
-
-  <form id="keyForm">
-    <input
-      id="keyInput"
-      type="password"
-      placeholder="🔑 Enter your key..."
-      autocomplete="off"
-      required
-    >
-
-    <button class="unlock" type="submit">
-      UNLOCK ACCESS &nbsp; ↗
+  <section id="home">
+    <button class="start" onclick="startPanel()">
+      🚀 START
     </button>
-  </form>
+  </section>
 
-  <div id="message" aria-live="polite"></div>
+  <section id="telegramSection" class="hidden">
+    <p>STEP 1 — JOIN TELEGRAM</p>
+    <button class="telegram" onclick="joinTelegram()">
+      ✈️ TELEGRAM JOIN
+    </button>
+    <p class="status" id="telegramStatus">
+      Join our Telegram channel
+    </p>
+  </section>
 
-  <div class="or">OR JOIN US</div>
+  <section id="whatsappSection" class="hidden">
+    <p>STEP 2 — JOIN WHATSAPP</p>
+    <button class="whatsapp" onclick="joinWhatsApp()">
+      💚 WHATSAPP JOIN
+    </button>
+    <p class="status" id="whatsappStatus">
+      Join our WhatsApp channel
+    </p>
+  </section>
 
-  <a class="telegram"
-     href="https://t.me/Z4xbanmodz"
-     target="_blank"
-     rel="noopener noreferrer">
+  <section id="keySection" class="hidden">
+    <h2 style="color:#00eaff">🎉 YOUR ACCESS DETAILS</h2>
 
-    <div class="tg-icon">➤</div>
+    <div class="keybox">
+      <p>KEY :</p>
+      <p class="key" id="keyValue">02 VIP</p>
 
-    <div class="tg-text">
-      <strong>Telegram</strong>
-      <small>Join Our Channel</small>
+      <p>PASSWORD :</p>
+      <p class="password" id="passwordValue">6902</p>
     </div>
 
-    <div class="arrow">→</div>
-  </a>
+    <button class="copy" onclick="copyDetails()">
+      📋 COPY KEY & PASSWORD
+    </button>
 
-  <div class="footer">02 MODZ • VIP ACCESS</div>
+    <p class="status" id="copyStatus"></p>
+  </section>
 
-</main>
-
-<div class="popup" id="settingsPopup">
-  <div class="popup-box">
-    <h2>⚙ SETTINGS</h2>
-    <p>OWNER : <strong>@Stylex77</strong></p>
-    <p>PROJECT : 02 MODZ VIP</p>
-    <button class="close" id="closeBtn">CLOSE</button>
-  </div>
+  <p class="note">POWERED BY 02 VIP</p>
 </div>
 
 <script>
-const destination =
-"https://dripwire.cc/config.php?key=2430986274&server=ind&tab=setup";
+let telegramTimer = null;
+let telegramDone = false;
+let whatsappDone = false;
+let seconds = 5;
 
-const form = document.getElementById("keyForm");
-const keyInput = document.getElementById("keyInput");
-const message = document.getElementById("message");
+function startPanel() {
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("telegramSection")
+    .classList.remove("hidden");
+}
 
-form.addEventListener("submit", function(e){
-  e.preventDefault();
+function joinTelegram() {
+  if (telegramTimer !== null) return;
 
-  const key = keyInput.value.trim();
+  window.open(
+    "https://t.me/Z4xbanmod",
+    "_blank"
+  );
 
-  if(!key){
-    message.textContent = "Please enter your key!";
-    return;
+  seconds = 5;
+  const status = document.getElementById("telegramStatus");
+  status.textContent = "Please wait " + seconds + " seconds...";
+
+  telegramTimer = setInterval(function() {
+    seconds--;
+
+    if (seconds > 0) {
+      status.textContent =
+        "Please wait " + seconds + " seconds...";
+    } else {
+      clearInterval(telegramTimer);
+      telegramTimer = null;
+      telegramDone = true;
+
+      status.textContent = "Telegram step completed!";
+      document.getElementById("whatsappSection")
+        .classList.remove("hidden");
+      document.getElementById("whatsappSection")
+        .scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, 1000);
+}
+
+function joinWhatsApp() {
+  window.open(
+    "https://whatsapp.com/channel/0029VbDdRTs1SWt62hbSl70i",
+    "_blank"
+  );
+
+  whatsappDone = true;
+
+  document.getElementById("whatsappStatus")
+    .textContent = "WhatsApp step completed!";
+
+  document.getElementById("keySection")
+    .classList.remove("hidden");
+
+  document.getElementById("keySection")
+    .scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function copyDetails() {
+  const details = "KEY: 02 VIP\nPASSWORD: 6902";
+  const status = document.getElementById("copyStatus");
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(details)
+      .then(function() {
+        status.textContent = "Copied successfully!";
+      })
+      .catch(function() {
+        fallbackCopy(details, status);
+      });
+  } else {
+    fallbackCopy(details, status);
+  }
+}
+
+function fallbackCopy(text, status) {
+  const area = document.createElement("textarea");
+  area.value = text;
+  document.body.appendChild(area);
+  area.select();
+
+  try {
+    document.execCommand("copy");
+    status.textContent = "Copied successfully!";
+  } catch (e) {
+    status.textContent = text;
   }
 
-  message.textContent = "Connecting...";
-
-  window.location.href = destination;
-});
-
-const popup = document.getElementById("settingsPopup");
-
-document.getElementById("settingsBtn").onclick = function(){
-  popup.style.display = "flex";
-};
-
-document.getElementById("closeBtn").onclick = function(){
-  popup.style.display = "none";
-};
-
-popup.addEventListener("click", function(e){
-  if(e.target === popup){
-    popup.style.display = "none";
-  }
-});
+  area.remove();
+}
 </script>
-
 </body>
 </html>
